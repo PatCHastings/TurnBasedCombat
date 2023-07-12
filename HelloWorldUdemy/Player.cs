@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 
 namespace TurnBasedCombat
 {
@@ -43,7 +44,6 @@ namespace TurnBasedCombat
 
         public void UseMagicAttack(Opponent opponent)
         {
-            //Opponent opponent = new Opponent();
             MonsterType monsterType = opponent.MonsterType;
             int magicDamage = CalculateMagicDamage();
             monsterType.health -= magicDamage;
@@ -56,10 +56,25 @@ namespace TurnBasedCombat
             return baseDamage; 
         }
 
+        internal void selectItem()
+        {
+            ItemBag bag = new ItemBag();
+            if (bag != null)
+            {
+                Console.WriteLine("Items: " + bag);
+            }
+            else
+            {
+                Console.WriteLine("Your Item bag is empty..");
+            }
+        }
+
         internal void playerVitals()
         {
             Console.WriteLine(name + " health: " + health);
         }
+
+        
     }
 }
 

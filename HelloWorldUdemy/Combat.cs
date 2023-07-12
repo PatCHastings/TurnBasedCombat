@@ -39,7 +39,7 @@ namespace TurnBasedCombat
             Console.WriteLine(player.Name + " What will you do?" +
                 "\n1: Fight" +
                 "\n2: Magic" +
-                "\n3: Run");
+                "\n3: use item");
 
             bool gameOver = false; 
             while (gameOver == false)
@@ -60,9 +60,10 @@ namespace TurnBasedCombat
                         player.UseMagicAttack(opponent);
                         opponent.opponentVitals();
                         player.playerVitals();
-                        break; 
-
-
+                        break;
+                    //case 3:
+                    //    Console.WriteLine(player.name + " reaches into his bag...");
+                    //    player.selectItem();
                 }
             }
         }

@@ -8,5 +8,28 @@ namespace TurnBasedCombat
 {
     internal class ItemBag
     {
+        internal List<Items> itemList = new List<Items>();
+        public List<Items> ItemList { get; set; }
+
+        internal void selectItem()
+        {
+            
+            while (itemList != null)
+            {
+                Console.WriteLine("Items: " + itemList);
+                string itemPrompt = Console.ReadLine().ToLower();
+                foreach (Items selectItem in itemList)
+                {
+                    
+                }
+                Console.WriteLine("Your Item bag is empty..");
+                break;
+            }
+        }
+
+        internal void ShowInventory()
+        {
+            Console.WriteLine(itemList);
+        }
     }
 }
