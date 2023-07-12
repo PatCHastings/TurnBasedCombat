@@ -32,7 +32,7 @@ namespace TurnBasedCombat
             MonsterType monsterType = opponent.MonsterType;
             int physDamage = CalculatePhysDamage();
             monsterType.health -= physDamage;
-            Console.WriteLine(Name + " swings his sword and strikes! Dealing " + physDamage + " damage to " + monsterType.name);
+            Console.WriteLine(name + " swings his sword and strikes! Dealing " + physDamage + " damage to the " + monsterType.name);
         }
         private int CalculatePhysDamage()
         {
@@ -47,7 +47,7 @@ namespace TurnBasedCombat
             MonsterType monsterType = opponent.MonsterType;
             int magicDamage = CalculateMagicDamage();
             monsterType.health -= magicDamage;
-            Console.WriteLine(name + " unleashes a magic spell! Dealing " + magicDamage + " damage to the enemy."); 
+            Console.WriteLine(name + " unleashes a magic spell! Dealing " + magicDamage + " damage to the " + monsterType.name); 
         }
         private int CalculateMagicDamage()
         {
