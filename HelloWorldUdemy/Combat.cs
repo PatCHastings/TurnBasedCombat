@@ -28,6 +28,8 @@ namespace TurnBasedCombat
         {
             Player player = new Player { name = "pat", level = 5, armorRating = 3, health = 49 };
             //MonsterType monster = new MonsterType { name = "test", level = 4, attackDamage = 2, health = 50 };
+            ItemBag itemBag = new ItemBag();
+            Item healthPotion = new Item();
             Opponent opponent = new Opponent();
             MonsterType monster = opponent.MonsterType;
 
@@ -36,7 +38,7 @@ namespace TurnBasedCombat
             player.name = promptName;
             
             Console.WriteLine("Ok then, " + player.name + "...the opponent has entered the arena! A fierce " + monster.name + "!");
-            Console.WriteLine(player.Name + " What will you do?" +
+            Console.WriteLine(player.name + " What will you do?" +
                 "\n1: Fight" +
                 "\n2: Magic" +
                 "\n3: use item");
@@ -45,7 +47,6 @@ namespace TurnBasedCombat
             while (gameOver == false)
             {
                 
-
                 int prompt = int.Parse(Console.ReadLine());
                 switch (prompt)
                 {
@@ -61,9 +62,13 @@ namespace TurnBasedCombat
                         opponent.opponentVitals();
                         player.playerVitals();
                         break;
-                    //case 3:
-                    //    Console.WriteLine(player.name + " reaches into his bag...");
-                    //    player.selectItem();
+                    case 3:
+                        Console.WriteLine(player.name + " reaches into his bag...");
+                        itemBag.ShowInventory();
+                        itemBag.SelectItem(player);
+                        opponent.opponentVitals();
+                        player.playerVitals();
+                        break;
                 }
             }
         }

@@ -56,18 +56,7 @@ namespace TurnBasedCombat
             return baseDamage; 
         }
 
-        internal void selectItem()
-        {
-            ItemBag bag = new ItemBag();
-            if (bag != null)
-            {
-                Console.WriteLine("Items: " + bag);
-            }
-            else
-            {
-                Console.WriteLine("Your Item bag is empty..");
-            }
-        }
+        
 
         internal void playerVitals()
         {
