@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace TurnBasedCombat
 {
@@ -12,12 +13,6 @@ namespace TurnBasedCombat
             Console.WriteLine("Items in the bag:");
             ShowInventory();
 
-            if (itemList.Count == 0)
-            {
-                Console.WriteLine("Your item bag is empty.");
-                return;
-            }
-
             Console.Write("Enter the name of the item you want to use: ");
             string itemPrompt = Console.ReadLine().ToLower();
 
@@ -25,12 +20,14 @@ namespace TurnBasedCombat
 
             if (selectedItem != null)
             {
+                Type itemType = selectedItem.GetType();
+                MethodInfo useMethod = itemType.GetMethod("use");
                 Console.WriteLine(player.name + " just used " + selectedItem.ItemName + "...");
                 UseItem(selectedItem);
             }
             else
             {
-                Console.WriteLine("Invalid item selection.");
+                Console.WriteLine("selected item does not have a use method.");
             }
         }
 

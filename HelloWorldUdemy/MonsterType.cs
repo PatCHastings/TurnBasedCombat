@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TurnBasedCombat
 {
-    internal class MonsterType
+    public class MonsterType
     {
         public string name;
         public int level; 

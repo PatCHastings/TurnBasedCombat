@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Net.Security;
 using System.Numerics;
 using System.Text;
@@ -29,7 +30,10 @@ namespace TurnBasedCombat
             Player player = new Player { name = "pat", level = 5, armorRating = 3, health = 49 };
             //MonsterType monster = new MonsterType { name = "test", level = 4, attackDamage = 2, health = 50 };
             ItemBag itemBag = new ItemBag();
-            Item healthPotion = new Item();
+            Item healthPotion = new Item("healthpotion", 1, true);
+            HealingPotion healingPotion = new HealingPotion("healingpotion", 20);
+            itemBag.AddItem(healthPotion);
+            itemBag.AddItem(healingPotion);
             Opponent opponent = new Opponent();
             MonsterType monster = opponent.MonsterType;
 
@@ -37,39 +41,47 @@ namespace TurnBasedCombat
             string promptName = Console.ReadLine();
             player.name = promptName;
             
-            Console.WriteLine("Ok then, " + player.name + "...the opponent has entered the arena! A fierce " + monster.name + "!");
-            Console.WriteLine(player.name + " What will you do?" +
-                "\n1: Fight" +
-                "\n2: Magic" +
-                "\n3: use item");
+            
 
-            bool gameOver = false; 
+            bool gameOver = false;
             while (gameOver == false)
             {
-                
-                int prompt = int.Parse(Console.ReadLine());
-                switch (prompt)
+                Console.WriteLine("Ok then, " + player.name + "...the opponent has entered the arena! A fierce " + monster.name + "!");
+                Console.WriteLine(player.name + " What will you do?" +
+                    "\n1: Fight" +
+                    "\n2: Magic" +
+                    "\n3: use item");
+                string retry = "no";
+                do 
                 {
-                    case 1:
-                        Console.WriteLine("CraaacK!");
-                        player.UsePhysAttack(opponent);
-                        opponent.opponentVitals();
-                        player.playerVitals();
-                        break;
-                    case 2:
-                        Console.WriteLine("ZAaaaP!");
-                        player.UseMagicAttack(opponent);
-                        opponent.opponentVitals();
-                        player.playerVitals();
-                        break;
-                    case 3:
-                        Console.WriteLine(player.name + " reaches into his bag...");
-                        itemBag.ShowInventory();
-                        itemBag.SelectItem(player);
-                        opponent.opponentVitals();
-                        player.playerVitals();
-                        break;
-                }
+                    int prompt = int.Parse(Console.ReadLine());
+                    switch (prompt)
+                    {
+                        case 1:
+                            Console.WriteLine("CraaacK!");
+                            player.UsePhysAttack(opponent);
+                            opponent.opponentVitals();
+                            player.playerVitals();
+                            break;
+                        case 2:
+                            Console.WriteLine("ZAaaaP!");
+                            player.UseMagicAttack(opponent);
+                            opponent.opponentVitals();
+                            player.playerVitals();
+                            break;
+                        case 3:
+                            Console.WriteLine(player.name + " reaches into his bag...");
+                            itemBag.SelectItem(player);
+                            opponent.opponentVitals();
+                            player.playerVitals();
+                            break;
+                        default:
+                            Console.WriteLine("thats not an option");
+                            Console.WriteLine("would you like to retry?");
+                            retry = Console.ReadLine();
+                            break;
+                    }
+                } while (retry != "no");
             }
         }
     }

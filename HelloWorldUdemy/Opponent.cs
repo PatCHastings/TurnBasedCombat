@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TurnBasedCombat
 {
-    internal class Opponent
+    public class Opponent
     {
         private MonsterType[] monsterTypes =
         {
@@ -16,19 +16,6 @@ namespace TurnBasedCombat
             new MonsterType("Wyrm", 7, 100, 50)
         };
 
-        //protected String type;
-        //protected int level;
-        //protected int armorRating;
-        //internal int health;
-        //protected bool Alive;
-
-        //public Opponent(string type, int level, int armorRating, int health)
-        //{
-        //    this.type = type;
-        //    this.level = level;
-        //    this.armorRating = armorRating;
-        //    this.health = health;
-        //}
         public Opponent()
         {
             GenerateRandomMonsterType();

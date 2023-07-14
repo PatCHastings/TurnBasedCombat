@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 
 namespace TurnBasedCombat
 {
-    class Player
+    public class Player
     {
         internal String name;
         internal int level;
