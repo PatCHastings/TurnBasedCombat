@@ -40,13 +40,12 @@ namespace TurnBasedCombat
             Console.WriteLine("Welcome to brutal combat! The fight is about to start...What is your name, stranger?");
             string promptName = Console.ReadLine();
             player.name = promptName;
-            
-            
+
+            Console.WriteLine("Ok then, " + player.name + "...the opponent has entered the arena! A fierce " + monster.name + "!");
 
             bool gameOver = false;
             while (gameOver == false)
             {
-                Console.WriteLine("Ok then, " + player.name + "...the opponent has entered the arena! A fierce " + monster.name + "!");
                 Console.WriteLine(player.name + " What will you do?" +
                     "\n1: Fight" +
                     "\n2: Magic" +

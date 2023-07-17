@@ -10,6 +10,12 @@ namespace TurnBasedCombat
 
         internal void SelectItem(Player player)
         {
+            if (itemList.Count == 0)
+            {
+                Console.WriteLine("Your item bag is empty..");
+                return;
+            }
+
             Console.WriteLine("Items in the bag:");
             ShowInventory();
 
@@ -21,21 +27,33 @@ namespace TurnBasedCombat
             if (selectedItem != null)
             {
                 Type itemType = selectedItem.GetType();
-                MethodInfo useMethod = itemType.GetMethod("use");
+                MethodInfo useMethod = itemType.GetMethod("Use");
                 Console.WriteLine(player.name + " just used " + selectedItem.ItemName + "...");
-                UseItem(selectedItem);
+
+
+
+                if (useMethod != null)
+                {
+                    useMethod.Invoke(selectedItem, new object[] { player });
+                }
+                else
+                {
+                    Console.WriteLine("selected item does not have a use method.");
+                }
+                UseItem(selectedItem, player);
             }
             else
             {
-                Console.WriteLine("selected item does not have a use method.");
+                Console.WriteLine("Invalid item selection");
             }
         }
 
-        internal void UseItem(Item selectedItem)
+        internal void UseItem(Item selectedItem, Player player)
         {
-            Player player = new Player();
-            Console.WriteLine(player.name + " used " + selectedItem.ItemName + "...");
-            player.health += 10;
+            //Player player = new Player();
+            Console.WriteLine(player.name + " used " + selectedItem.itemName + "...");
+            int playerHealing = player.CalculatePlayerHealing();
+            player.health += playerHealing;
             // TODO: Implement the logic to use the selected item
             
         }
@@ -43,7 +61,7 @@ namespace TurnBasedCombat
         internal void AddItem(Item item)
         {
             itemList.Add(item);
-            Console.WriteLine(item.ItemName + " added to the item bag.");
+            //Console.WriteLine(item.ItemName + " added to the item bag.");
         }
 
         internal void RemoveItem(Item item)

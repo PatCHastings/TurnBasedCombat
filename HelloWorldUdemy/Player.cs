@@ -56,7 +56,12 @@ namespace TurnBasedCombat
             return baseDamage; 
         }
 
-        
+        internal int CalculatePlayerHealing()
+        {
+            Random random = new Random();
+            int baseHealing = random.Next(Level, level * 2);
+            return Math.Max(baseHealing - armorRating, 2);
+        }
 
         internal void playerVitals()
         {

@@ -4,9 +4,9 @@ namespace TurnBasedCombat
 {
     public class Item
     {
-        protected string itemName;
-        protected int total;
-        protected bool singleUse;
+        internal string itemName;
+        internal int total;
+        internal bool singleUse;
 
         public Item(string itemName, int total, bool singleUse)
         {
