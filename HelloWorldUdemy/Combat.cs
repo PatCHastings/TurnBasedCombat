@@ -30,10 +30,13 @@ namespace TurnBasedCombat
             Player player = new Player { name = "pat", level = 5, armorRating = 3, health = 49 };
             //MonsterType monster = new MonsterType { name = "test", level = 4, attackDamage = 2, health = 50 };
             ItemBag itemBag = new ItemBag();
-            Item healthPotion = new Item("healthpotion", 1, true);
+            //Item healthPotion = new Item("healthpotion", 1, true);
+            //Item firebomb = new Item("firebomb", 1, true);
             HealingPotion healingPotion = new HealingPotion("healingpotion", 20);
-            itemBag.AddItem(healthPotion);
+            Firebomb firebomb = new Firebomb("firebomb", 20);
+            
             itemBag.AddItem(healingPotion);
+            itemBag.AddItem(firebomb); 
             Opponent opponent = new Opponent();
             MonsterType monster = opponent.MonsterType;
 
