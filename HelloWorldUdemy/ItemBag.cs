@@ -8,7 +8,7 @@ namespace TurnBasedCombat
     {
         private List<Item> itemList = new List<Item>();
 
-        internal void SelectItem(Player player)
+        internal void SelectItem(Player player, MonsterType Targetmonster)
         {
             if (itemList.Count == 0)
             {
@@ -34,7 +34,7 @@ namespace TurnBasedCombat
 
                 if (useMethod != null)
                 {
-                    useMethod.Invoke(selectedItem, new object[] { player });
+                    useMethod.Invoke(selectedItem, new object[] { Targetmonster });
                 }
                 else
                 {
@@ -61,7 +61,7 @@ namespace TurnBasedCombat
         internal void AddItem(Item item)
         {
             itemList.Add(item);
-            Console.WriteLine(item.itemName + " added to the item bag.");
+            Console.WriteLine("(" + item.itemName + " added to item bag)");
         }
 
         internal void RemoveItem(Item item)
@@ -69,7 +69,7 @@ namespace TurnBasedCombat
             bool success = itemList.Remove(item);
             if (success)
             {
-                Console.WriteLine(item.ItemName + " removed from the item bag.");
+                Console.WriteLine("(" + item.ItemName + " removed from item bag)");
             }
             else
             {

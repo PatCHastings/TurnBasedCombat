@@ -8,7 +8,7 @@ namespace TurnBasedCombat
 {
     public class Opponent
     {
-        private MonsterType[] monsterTypes =
+        private List<MonsterType> monsterTypes = new List<MonsterType>
         {
             new MonsterType("Imp", 3, 30, 10),
             new MonsterType("Ogre", 6, 100, 30),
@@ -20,13 +20,13 @@ namespace TurnBasedCombat
         {
             GenerateRandomMonsterType();
         }
-        public MonsterType MonsterType { get; private set; }
+        public MonsterType MonsterType { get; set; }
 
-        private void GenerateRandomMonsterType()
+        internal void GenerateRandomMonsterType()
         {
             Random random = new Random();
-            int index = random.Next(monsterTypes.Length);
-            MonsterType = monsterTypes[index];
+            int randomIndex = random.Next(0, monsterTypes.Count);
+            MonsterType = monsterTypes[randomIndex];
         }
     
         public String Name { get; set; }  

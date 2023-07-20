@@ -28,10 +28,7 @@ namespace TurnBasedCombat
         public void gameLoop()
         {
             Player player = new Player { name = "pat", level = 5, armorRating = 3, health = 49 };
-            //MonsterType monster = new MonsterType { name = "test", level = 4, attackDamage = 2, health = 50 };
             ItemBag itemBag = new ItemBag();
-            //Item healthPotion = new Item("healthpotion", 1, true);
-            //Item firebomb = new Item("firebomb", 1, true);
             HealingPotion healingPotion = new HealingPotion("healingpotion", 20);
             Firebomb firebomb = new Firebomb("firebomb", 20);
             
@@ -39,7 +36,7 @@ namespace TurnBasedCombat
             itemBag.AddItem(firebomb); 
             Opponent opponent = new Opponent();
             MonsterType monster = opponent.MonsterType;
-
+            
             Console.WriteLine("Welcome to brutal combat! The fight is about to start...What is your name, stranger?");
             string promptName = Console.ReadLine();
             player.name = promptName;
@@ -73,7 +70,7 @@ namespace TurnBasedCombat
                             break;
                         case 3:
                             Console.WriteLine(player.name + " reaches into his bag...");
-                            itemBag.SelectItem(player);
+                            itemBag.SelectItem(player, monster);
                             opponent.opponentVitals();
                             player.playerVitals();
                             break;
