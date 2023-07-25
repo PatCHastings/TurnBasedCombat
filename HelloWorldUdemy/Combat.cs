@@ -35,6 +35,7 @@ namespace TurnBasedCombat
             itemBag.AddItem(healingPotion);
             itemBag.AddItem(firebomb); 
             Opponent opponent = new Opponent();
+            opponent.GenerateRandomMonsterType();
             MonsterType monster = opponent.MonsterType;
             
             Console.WriteLine("Welcome to brutal combat! The fight is about to start...What is your name, stranger?");
@@ -59,20 +60,23 @@ namespace TurnBasedCombat
                         case 1:
                             Console.WriteLine("CraaacK!");
                             player.UsePhysAttack(opponent);
-                            opponent.opponentVitals();
+                            opponent.RemoveDefeatedMonsterAndGenerateNew();
                             player.playerVitals();
+                            opponent.opponentVitals();
                             break;
                         case 2:
                             Console.WriteLine("ZAaaaP!");
                             player.UseMagicAttack(opponent);
-                            opponent.opponentVitals();
+                            opponent.RemoveDefeatedMonsterAndGenerateNew();
                             player.playerVitals();
+                            opponent.opponentVitals();
                             break;
                         case 3:
                             Console.WriteLine(player.name + " reaches into his bag...");
                             itemBag.SelectItem(player, monster);
-                            opponent.opponentVitals();
+                            opponent.RemoveDefeatedMonsterAndGenerateNew();
                             player.playerVitals();
+                            opponent.opponentVitals();
                             break;
                         default:
                             Console.WriteLine("thats not an option");

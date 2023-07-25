@@ -34,7 +34,7 @@ namespace TurnBasedCombat
 
                 if (useMethod != null)
                 {
-                    useMethod.Invoke(selectedItem, new object[] { Targetmonster });
+                    useMethod.Invoke(selectedItem, new object[] { player, Targetmonster });
                 }
                 else
                 {

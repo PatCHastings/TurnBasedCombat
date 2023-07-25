@@ -18,17 +18,40 @@ namespace TurnBasedCombat
 
         public Opponent()
         {
-            GenerateRandomMonsterType();
+            
         }
         public MonsterType MonsterType { get; set; }
 
-        internal void GenerateRandomMonsterType()
+        internal MonsterType GenerateRandomMonsterType()
         {
             Random random = new Random();
             int randomIndex = random.Next(0, monsterTypes.Count);
             MonsterType = monsterTypes[randomIndex];
+            return MonsterType;
         }
-    
+        public void RemoveDefeatedMonsterAndGenerateNew()
+        {
+            // Find the defeated monster with health <= 0
+            //MonsterType defeatedMonster = monsterTypes.Find(monster => monster.health <= 0);\
+            for (int i = monsterTypes.Count - 1; i >= 0; i--)
+            {
+                if (monsterTypes[i].health <= 0)
+                {
+                    // Remove the defeated monster from the list
+                    monsterTypes.RemoveAt(i);
+                    Console.WriteLine(MonsterType.name +  " has been defeated! But a new opponent draws near..");
+                    // Remove the defeated monster from the list
+                    //monsterTypes.Remove(defeatedMonster);
+
+                    // Generate a new random monster and add it to the list
+                    MonsterType newMonster = GenerateRandomMonsterType();
+                    monsterTypes.Add(newMonster);
+                    Console.WriteLine(newMonster + " has now entered the arena!");
+                }
+            }
+        }
+
+
         public String Name { get; set; }  
         public int Level { get; set; }  
         public int ArmorRating { get; set; }

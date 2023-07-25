@@ -42,7 +42,7 @@ namespace TurnBasedCombat
             int baseHealing = random.Next(player.level, player.level * 2);
             return Math.Max(baseHealing - player.armorRating, 2);
         }
-        public void Use(Player player)
+        public void Use(Player player, MonsterType targetMonster)
         {
             int playerHealing = CalculatePlayerHealing();
             player.health += playerHealing;
@@ -62,18 +62,21 @@ namespace TurnBasedCombat
         }
         public int DamageAmount { get; set; }
 
-        public void Use(MonsterType targetMonster)
+        public void Use(Player player, MonsterType targetMonster)
         {
-            
-            UseFirebomb(targetMonster);
-        }
-
-        public void UseFirebomb(MonsterType monster)
-        {
-            
+            MonsterType monster = new MonsterType();
             int damageAmount = CalculatePhysDamage();
             monster.health -= damageAmount;
             Console.WriteLine("..." + monster.name + " gets hit by a Firebomb and takes " + damageAmount + " damage!");
+            //UseFirebomb(targetMonster);
+        }
+
+        public void UseFirebomb()
+        {
+            //MonsterType monster = new MonsterType();
+            //int damageAmount = CalculatePhysDamage();
+            //monster.health -= damageAmount;
+            //Console.WriteLine("..." + monster.name + " gets hit by a Firebomb and takes " + damageAmount + " damage!");
         }
         private int CalculatePhysDamage()
         {
