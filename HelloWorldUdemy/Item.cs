@@ -48,7 +48,6 @@ namespace TurnBasedCombat
             player.health += playerHealing;
             Console.WriteLine(player.name + " used a " + itemName + " and gained " + playerHealing + " pts of health!"); ;
         }
-        
     }
 
     public class Firebomb : Item
@@ -67,7 +66,7 @@ namespace TurnBasedCombat
             MonsterType monster = new MonsterType();
             int damageAmount = CalculatePhysDamage();
             monster.health -= damageAmount;
-            Console.WriteLine("..." + monster.name + " gets hit by a Firebomb and takes " + damageAmount + " damage!");
+            Console.WriteLine("..." + targetMonster.name + " gets hit by a Firebomb and takes " + damageAmount + " damage!");
             //UseFirebomb(targetMonster);
         }
 
