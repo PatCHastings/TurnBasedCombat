@@ -46,7 +46,7 @@ namespace TurnBasedCombat
                     // Generate a new random monster and add it to the list
                     MonsterType newMonster = GenerateRandomMonsterType();
                     monsterTypes.Add(newMonster);
-                    Console.WriteLine(newMonster + " has now entered the arena!");
+                    Console.WriteLine(newMonster.name + " has now entered the arena!");
                 }
             }
         }
