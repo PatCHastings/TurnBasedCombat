@@ -7,14 +7,18 @@ namespace TurnBasedCombat
     {
         internal String name;
         internal int level;
+        internal int attackDamage;
         internal int armorRating;
         internal int health;
+        public Weapon EquippedWeapon { get; set; }
+        public Armor EquippedArmor { get; set; }
         
 
-        public Player(string name, int level, int armorRating, int health)
+        public Player(string name, int level, int attackDamage, int armorRating, int health)
         {
             this.name = name;
             this.level = level;
+            this.attackDamage = attackDamage;
             this.armorRating = armorRating;
             this.health = health;
         }
@@ -26,7 +30,17 @@ namespace TurnBasedCombat
         public int ArmorRating { get; set; }
         public int Health { get; set; }
 
-        
+        public int CalculateEquippedWeaponAttackDamage()
+        {
+            if (EquippedWeapon != null)
+            {
+                return EquippedWeapon.AttackDamage; 
+            }
+            else
+            {
+                return attackDamage;
+            }
+        }
 
         public void UsePhysAttack(Opponent opponent)
         {
@@ -40,7 +54,11 @@ namespace TurnBasedCombat
         private int CalculatePhysDamage()
         {
             Random random = new Random();
-            int baseDamage = random.Next(level, level * 2);
+            if (EquippedWeapon != null)
+            {
+
+            }
+            int baseDamage = random.Next(attackDamage, attackDamage * 2);
             return Math.Max(baseDamage - armorRating, 2);
         }
 
