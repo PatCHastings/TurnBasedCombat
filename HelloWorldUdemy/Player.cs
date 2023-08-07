@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Linq;
+using System.Numerics;
 
 namespace TurnBasedCombat
 {
@@ -12,6 +14,7 @@ namespace TurnBasedCombat
         internal int health;
         public Weapon EquippedWeapon { get; set; }
         public Armor EquippedArmor { get; set; }
+        public List<Weapon> AvailableWeaponList { get; set; }
         
 
         public Player(string name, int level, int attackDamage, int armorRating, int health)
@@ -21,14 +24,56 @@ namespace TurnBasedCombat
             this.attackDamage = attackDamage;
             this.armorRating = armorRating;
             this.health = health;
+
+            AvailableWeaponList = new List<Weapon>();
+            EquippedWeapon = WoodenSword; 
+            AvailableWeaponList.Add(EquippedWeapon);
         }
         public Player()
         {
         }
         public string Name { get; set; }
         public int Level { get; set; }
+        public int AttackDamage { get; set; }   
         public int ArmorRating { get; set; }
         public int Health { get; set; }
+
+        public void ShowAvailableWeapons()
+        {
+            if (AvailableWeaponList != null)
+            {
+                Console.WriteLine("Available Weapons:");
+                int index = 1;
+                foreach (Weapon weapon in AvailableWeaponList)
+                {
+                    Console.WriteLine(index + ": " + weapon.ItemName);
+                }
+            }
+            else
+            {
+                Console.WriteLine("You do not have any weapons right now..");
+                return;
+            }
+            
+            
+        }
+
+        public void EquipWeapon(int weaponIndex)
+        {
+            if (weaponIndex >= 1 && weaponIndex <= AvailableWeaponList.Count)
+            {
+                Weapon selectedWeapon = AvailableWeaponList[weaponIndex - 1];
+
+                if (EquippedWeapon != null)
+                {
+                    
+                }
+                else
+                {
+                    return; 
+                }
+            }
+        }
 
         public int CalculateEquippedWeaponAttackDamage()
         {
@@ -90,7 +135,34 @@ namespace TurnBasedCombat
             Console.WriteLine(name + " health: " + health);
         }
 
-        
+        public void StatsManagement()
+        {
+            Console.WriteLine("After retreating to safety, " + name + " finds himself in the slave quarters.." +
+                                "\n1: Manage equipment" +
+                                "\n2: Re-enter the Arena..");
+
+            bool leaveQuarters = false;
+            while (leaveQuarters != true)
+            {
+                do
+                {
+                    ShowAvailableWeapons();
+                    int prompt = int.Parse(Console.ReadLine());
+                    switch (prompt)
+                    {
+                        case 1:
+                            int weaponIndex = int.Parse(Console.ReadLine());
+                            EquipWeapon(weaponIndex);
+                            break;
+
+                        case 2:
+                            Console.WriteLine(name + "ventures back to the Arena for more action..");
+                            leaveQuarters = false;
+                            break;
+                    }
+                } while (true);
+            }
+        }
     }
 }
 

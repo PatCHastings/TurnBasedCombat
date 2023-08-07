@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Security;
 using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace TurnBasedCombat
 {
     class Combat
     {
-        
+
         internal static bool GameOver(bool gameOver)
         {
             Console.WriteLine("You have died in battle..GAME OVER!");
@@ -33,11 +34,11 @@ namespace TurnBasedCombat
             Firebomb firebomb = new Firebomb("firebomb", 20);
             
             itemBag.AddItem(healingPotion);
-            itemBag.AddItem(firebomb); 
+            itemBag.AddItem(firebomb);
             Opponent opponent = new Opponent();
             opponent.GenerateRandomMonsterType();
             MonsterType monster = opponent.MonsterType;
-            
+
             Console.WriteLine("Welcome to brutal combat! The fight is about to start...What is your name, stranger?");
             string promptName = Console.ReadLine();
             player.name = promptName;
@@ -50,9 +51,10 @@ namespace TurnBasedCombat
                 Console.WriteLine(player.name + " What will you do?" +
                     "\n1: Fight" +
                     "\n2: Magic" +
-                    "\n3: use item");
+                    "\n3: use item" +
+                    "\n4: retreat to barracks");
                 string retry = "no";
-                do 
+                do
                 {
                     int prompt = int.Parse(Console.ReadLine());
                     switch (prompt)
@@ -78,6 +80,9 @@ namespace TurnBasedCombat
                             player.playerVitals();
                             opponent.opponentVitals();
                             break;
+                        case 4:
+                            player.StatsManagement();
+                            break;
                         default:
                             Console.WriteLine("thats not an option");
                             Console.WriteLine("would you like to retry?");
@@ -87,5 +92,11 @@ namespace TurnBasedCombat
                 } while (retry != "no");
             }
         }
+
+    
+            
+           
+        
+        
     }
 }

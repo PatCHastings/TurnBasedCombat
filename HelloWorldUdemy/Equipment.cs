@@ -20,19 +20,6 @@ namespace TurnBasedCombat
 
     }
 
-    internal class WoodenSword : Equipment
-    {
-        public string WeaponName { get; } 
-        public string WeaponType { get; }
-        public string WeaponDescription { get; }
-        public int AttackMultiplier { get; set; }
-        public WoodenSword(string name) : base(name)
-        {
-            WeaponName = "Wooden Sword";
-            WeaponType = "Sword";
-            WeaponDescription = "A plain wooden training sword not really suitable for combat..";
-            AttackMultiplier = 3;
-            
-        }
-    }
+    
+    
 }

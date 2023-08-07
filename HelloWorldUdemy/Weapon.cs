@@ -18,7 +18,7 @@ namespace TurnBasedCombat
 
     public class WoodenSword : Weapon
     {
-        public int attackModifier;
+        public int attackModifier = 2;
         public WoodenSword(int attackModifier) : base("Wooden Sword", 5)
         {
             this.attackModifier = attackModifier;
