@@ -8,6 +8,7 @@ using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using TurnBasedCombat;
 
 namespace TurnBasedCombat
 {

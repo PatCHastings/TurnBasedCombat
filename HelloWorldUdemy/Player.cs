@@ -25,9 +25,14 @@ namespace TurnBasedCombat
             this.armorRating = armorRating;
             this.health = health;
 
-            AvailableWeaponList = new List<Weapon>();
-            EquippedWeapon = WoodenSword; 
-            AvailableWeaponList.Add(EquippedWeapon);
+            AvailableWeaponList = new List<Weapon>
+            {
+                new WoodenSword(true)
+                
+
+            };
+            EquippedWeapon = AvailableWeaponList[0];
+
         }
         public Player()
         {
@@ -37,6 +42,7 @@ namespace TurnBasedCombat
         public int AttackDamage { get; set; }   
         public int ArmorRating { get; set; }
         public int Health { get; set; }
+
 
         public void ShowAvailableWeapons()
         {
@@ -54,8 +60,8 @@ namespace TurnBasedCombat
                 Console.WriteLine("You do not have any weapons right now..");
                 return;
             }
-            
-            
+
+
         }
 
         public void EquipWeapon(int weaponIndex)
@@ -75,17 +81,10 @@ namespace TurnBasedCombat
             }
         }
 
-        public int CalculateEquippedWeaponAttackDamage()
-        {
-            if (EquippedWeapon != null)
-            {
-                return EquippedWeapon.AttackDamage; 
-            }
-            else
-            {
-                return attackDamage;
-            }
-        }
+        //public Weapon CalculateEquippedWeaponAttackDamage()
+        //{
+            
+        //}
 
         public void UsePhysAttack(Opponent opponent)
         {
@@ -99,12 +98,14 @@ namespace TurnBasedCombat
         private int CalculatePhysDamage()
         {
             Random random = new Random();
-            if (EquippedWeapon != null)
-            {
-
-            }
+            
             int baseDamage = random.Next(attackDamage, attackDamage * 2);
             return Math.Max(baseDamage - armorRating, 2);
+            if (EquippedWeapon != null)
+            {
+                Weapon weapon = new Weapon();
+                weapon.AttackDamageModifier += baseDamage;
+            }
         }
 
         public void UseMagicAttack(Opponent opponent)

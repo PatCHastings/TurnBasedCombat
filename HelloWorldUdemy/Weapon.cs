@@ -8,21 +8,28 @@ namespace TurnBasedCombat
 {
     public class Weapon : Item
     {
-        public int AttackDamage { get; set; }   
+        public int AttackDamageModifier { get; set; }   
 
-        public Weapon(string name, int attackDamage) : base(name, 1, false)
+        public Weapon(string name, int attackDamageModifier) : base(name, 1, false)
         {
-            AttackDamage = attackDamage;
+            AttackDamageModifier = attackDamageModifier;
         }
+        public Weapon() { } 
     }
 
     public class WoodenSword : Weapon
     {
-        public int attackModifier = 2;
-        public WoodenSword(int attackModifier) : base("Wooden Sword", 5)
+        public bool isEquipped = false;
+       
+        public WoodenSword(bool isEquipped) : base("Wooden Sword", 5)
         {
-            this.attackModifier = attackModifier;
-
+            this.isEquipped = isEquipped;
+            if (isEquipped == true) 
+            {
+                Player player = new Player();
+                player.attackDamage += AttackDamageModifier;
+            }
+            
         }
     }
 }
