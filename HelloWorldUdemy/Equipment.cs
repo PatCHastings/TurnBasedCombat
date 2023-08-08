@@ -9,17 +9,19 @@ namespace TurnBasedCombat
 {
     internal class Equipment
     {
-        protected string name;
+        private List<Weapon> weaponList = new List<Weapon>();
 
-        public Equipment(string name)
+
+        internal void AddWeapon(Weapon weapon)
         {
-            this.name = name;  
+            weaponList.Add(weapon);
+            Console.WriteLine("(" + weapon.weaponName + " added to equipment arsenal)");
         }
-        public string Name { get; set; }
-
 
     }
 
     
-    
+
+
+
 }

@@ -29,11 +29,18 @@ namespace TurnBasedCombat
 
         public void gameLoop()
         {
-            Player player = new Player { name = "pat", level = 5, armorRating = 3, health = 49 };
+            Player player = new Player { name = "pat", level = 5, attackDamage = 3, armorRating = 3, health = 49 };
             ItemBag itemBag = new ItemBag();
             HealingPotion healingPotion = new HealingPotion("healingpotion", 20);
             Firebomb firebomb = new Firebomb("firebomb", 20);
-            
+            //Weapon woodenSword = new WoodenSword(true);
+            player.AvailableWeaponList = new List<Weapon>
+            {
+                new WoodenSword(true)
+
+
+            };
+            player.EquippedWeapon = player.AvailableWeaponList[0];
             itemBag.AddItem(healingPotion);
             itemBag.AddItem(firebomb);
             Opponent opponent = new Opponent();
@@ -83,6 +90,8 @@ namespace TurnBasedCombat
                             break;
                         case 4:
                             player.StatsManagement();
+                            player.playerVitals();
+                            opponent.opponentVitals();
                             break;
                         default:
                             Console.WriteLine("thats not an option");
@@ -91,8 +100,13 @@ namespace TurnBasedCombat
                             break;
                     }
                 } while (retry != "no");
+
+                // new switch case for statsManagement
+
             }
         }
+
+
 
     
             

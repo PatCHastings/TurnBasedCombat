@@ -44,25 +44,6 @@ namespace TurnBasedCombat
         public int Health { get; set; }
 
 
-        public void ShowAvailableWeapons()
-        {
-            if (AvailableWeaponList != null)
-            {
-                Console.WriteLine("Available Weapons:");
-                int index = 1;
-                foreach (Weapon weapon in AvailableWeaponList)
-                {
-                    Console.WriteLine(index + ": " + weapon.ItemName);
-                }
-            }
-            else
-            {
-                Console.WriteLine("You do not have any weapons right now..");
-                return;
-            }
-
-
-        }
 
         public void EquipWeapon(int weaponIndex)
         {
@@ -72,14 +53,38 @@ namespace TurnBasedCombat
 
                 if (EquippedWeapon != null)
                 {
-                    
+                    // Remove the currently equipped weapon and adjust the attack damage
+                    AttackDamage -= EquippedWeapon.GetAttackDamageModifier();
+                    Console.WriteLine(Name + " unequipped " + EquippedWeapon.weaponName + ". Attack damage decreased by " + EquippedWeapon.GetAttackDamageModifier());
                 }
-                else
-                {
-                    return; 
-                }
+
+                EquippedWeapon = selectedWeapon;
+                AttackDamage += EquippedWeapon.GetAttackDamageModifier();
+                Console.WriteLine(Name + " equipped " + selectedWeapon.weaponName + " and gained " + selectedWeapon.GetAttackDamageModifier() + " attack damage!");
+            }
+            else
+            {
+                Console.WriteLine("Invalid weapon selection.");
             }
         }
+
+        //public void EquipWeapon(int weaponIndex)
+        //{
+        //    if (weaponIndex >= 1 && weaponIndex <= AvailableWeaponList.Count)
+        //    {
+        //        Weapon selectedWeapon = EquippedWeapon;
+        //            EquippedWeapon = AvailableWeaponList[weaponIndex - 1];
+
+        //        if (EquippedWeapon != null)
+        //        {
+                    
+        //        }
+        //        else
+        //        {
+        //            return; 
+        //        }
+        //    }
+        //}
 
         //public Weapon CalculateEquippedWeaponAttackDamage()
         //{
@@ -100,12 +105,14 @@ namespace TurnBasedCombat
             Random random = new Random();
             
             int baseDamage = random.Next(attackDamage, attackDamage * 2);
-            return Math.Max(baseDamage - armorRating, 2);
+            int totalDamage = baseDamage + AttackDamage;
             if (EquippedWeapon != null)
             {
-                Weapon weapon = new Weapon();
-                weapon.AttackDamageModifier += baseDamage;
+
+                totalDamage += EquippedWeapon.GetAttackDamageModifier();
             }
+            return Math.Max(totalDamage, baseDamage);
+            
         }
 
         public void UseMagicAttack(Opponent opponent)
@@ -142,11 +149,11 @@ namespace TurnBasedCombat
                                 "\n1: Manage equipment" +
                                 "\n2: Re-enter the Arena..");
 
-            bool leaveQuarters = false;
-            while (leaveQuarters != true)
+            //bool leaveQuarters = false;
+            //while (leaveQuarters == false)
             {
-                do
-                {
+                
+                    Console.WriteLine("");
                     ShowAvailableWeapons();
                     int prompt = int.Parse(Console.ReadLine());
                     switch (prompt)
@@ -158,11 +165,30 @@ namespace TurnBasedCombat
 
                         case 2:
                             Console.WriteLine(name + "ventures back to the Arena for more action..");
-                            leaveQuarters = false;
                             break;
                     }
-                } while (true);
+                 //while (leaveQuarters == false);
             }
+        }
+
+        public void ShowAvailableWeapons()
+        {
+            if (AvailableWeaponList != null)
+            {
+                Console.WriteLine("Available Weapons:");
+                int index = 1;
+                foreach (Weapon weapon in AvailableWeaponList)
+                {
+                    Console.WriteLine(index + ": " + weapon.weaponName);
+                }
+            }
+            else
+            {
+                Console.WriteLine("You do not have any weapons right now..");
+                return;
+            }
+
+
         }
     }
 }

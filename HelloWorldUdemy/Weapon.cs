@@ -6,13 +6,19 @@ using System.Threading.Tasks;
 
 namespace TurnBasedCombat
 {
-    public class Weapon : Item
+    public class Weapon 
     {
+        internal string weaponName;
         public int AttackDamageModifier { get; set; }   
 
-        public Weapon(string name, int attackDamageModifier) : base(name, 1, false)
+        public Weapon(string weaponName, int attackDamageModifier) 
         {
+            this.weaponName = weaponName;   
             AttackDamageModifier = attackDamageModifier;
+        }
+        public virtual int GetAttackDamageModifier()
+        {
+            return AttackDamageModifier;
         }
         public Weapon() { } 
     }
@@ -27,7 +33,7 @@ namespace TurnBasedCombat
             if (isEquipped == true) 
             {
                 Player player = new Player();
-                player.attackDamage += AttackDamageModifier;
+                player.attackDamage = AttackDamageModifier;
             }
             
         }
