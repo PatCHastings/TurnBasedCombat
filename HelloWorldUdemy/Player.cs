@@ -149,26 +149,27 @@ namespace TurnBasedCombat
                                 "\n1: Manage equipment" +
                                 "\n2: Re-enter the Arena..");
 
-            //bool leaveQuarters = false;
-            //while (leaveQuarters == false)
+            bool leaveQuarters = false;
+            do
             {
                 
-                    Console.WriteLine("");
-                    ShowAvailableWeapons();
-                    int prompt = int.Parse(Console.ReadLine());
-                    switch (prompt)
-                    {
-                        case 1:
-                            int weaponIndex = int.Parse(Console.ReadLine());
-                            EquipWeapon(weaponIndex);
-                            break;
+                Console.WriteLine("");
+                ShowAvailableWeapons();
+                int prompt = int.Parse(Console.ReadLine());
+                switch (prompt)
+                {
+                    case 1:
+                        int weaponIndex = int.Parse(Console.ReadLine());
+                        EquipWeapon(weaponIndex);
+                        break;
 
-                        case 2:
-                            Console.WriteLine(name + "ventures back to the Arena for more action..");
-                            break;
-                    }
+                    case 2:
+                        Console.WriteLine(name + "ventures back to the Arena for more action..");
+                        leaveQuarters = true;
+                        break;
+                }
                  //while (leaveQuarters == false);
-            }
+            } while (leaveQuarters == false);
         }
 
         public void ShowAvailableWeapons()
