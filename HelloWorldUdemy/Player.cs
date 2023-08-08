@@ -145,26 +145,27 @@ namespace TurnBasedCombat
 
         public void StatsManagement()
         {
-            Console.WriteLine("After retreating to safety, " + name + " finds himself in the slave quarters.." +
+            Console.WriteLine(name + " steps back to make a quick adjustment.." +
                                 "\n1: Manage equipment" +
-                                "\n2: Re-enter the Arena..");
+                                "\n2: Re-engage enemy..");
 
             bool leaveQuarters = false;
             do
             {
                 
                 Console.WriteLine("");
-                ShowAvailableWeapons();
+                
                 int prompt = int.Parse(Console.ReadLine());
                 switch (prompt)
                 {
                     case 1:
+                        ShowAvailableWeapons();
                         int weaponIndex = int.Parse(Console.ReadLine());
                         EquipWeapon(weaponIndex);
                         break;
 
                     case 2:
-                        Console.WriteLine(name + "ventures back to the Arena for more action..");
+                        Console.WriteLine(name + " resumes a fighting stance..");
                         leaveQuarters = true;
                         break;
                 }
@@ -181,6 +182,7 @@ namespace TurnBasedCombat
                 foreach (Weapon weapon in AvailableWeaponList)
                 {
                     Console.WriteLine(index + ": " + weapon.weaponName);
+                    index++;
                 }
             }
             else

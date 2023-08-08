@@ -38,4 +38,20 @@ namespace TurnBasedCombat
             
         }
     }
+
+    public class Dagger : Weapon
+    {
+        public bool isEquipped = false;
+
+        public Dagger(bool isEquipped) : base("Dagger", 7)
+        {
+            this.isEquipped = isEquipped;
+            if (isEquipped == true)
+            {
+                Player player = new Player();
+                player.attackDamage = AttackDamageModifier;
+            }
+
+        }
+    }
 }

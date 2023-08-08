@@ -36,7 +36,8 @@ namespace TurnBasedCombat
             //Weapon woodenSword = new WoodenSword(true);
             player.AvailableWeaponList = new List<Weapon>
             {
-                new WoodenSword(true)
+                new WoodenSword(true),
+                new Dagger(false)
 
 
             };
@@ -60,7 +61,7 @@ namespace TurnBasedCombat
                     "\n1: Fight" +
                     "\n2: Magic" +
                     "\n3: use item" +
-                    "\n4: retreat to barracks");
+                    "\n4: switch weapons");
                 string retry = "no";
                 do
                 {
