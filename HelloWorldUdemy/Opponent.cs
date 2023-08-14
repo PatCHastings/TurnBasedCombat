@@ -37,6 +37,7 @@ namespace TurnBasedCombat
             {
                 if (monsterTypes[i].health <= 0)
                 {
+
                     // Remove the defeated monster from the list
                     monsterTypes.RemoveAt(i);
                     Console.WriteLine(MonsterType.name +  " has been defeated! But a new opponent draws near..");
@@ -56,6 +57,47 @@ namespace TurnBasedCombat
         public int Level { get; set; }  
         public int ArmorRating { get; set; }
         public int Health { get; set; }
+
+        public void PerformMonsterAttack(Player player)
+        {
+            int damage = CalculateMonsterAttackDamage();
+            Console.WriteLine(MonsterType.name + " attacks " + player.name + " and deals " + damage + " damage!");
+            player.health -= damage;
+
+        }
+        private int CalculateMonsterAttackDamage()
+        {
+            MonsterType monsterType = new MonsterType();
+            Random rand = new Random();
+            if (MonsterType.name == "Imp")
+            {
+                int baseDamage = rand.Next(monsterType.attackDamage, monsterType.attackDamage * 2);
+                int totalDamage = 2;// baseDamage + monsterType.attackDamage;
+                return totalDamage;
+            }
+            if (MonsterType.name == "Ogre")
+            {
+                int baseDamage = rand.Next(monsterType.attackDamage, monsterType.attackDamage * 2);
+                int totalDamage = 13;// baseDamage + monsterType.attackDamage;
+                return totalDamage;
+            }
+            if (MonsterType.name == "Scorpion")
+            {
+                int baseDamage = rand.Next(monsterType.attackDamage, monsterType.attackDamage * 2);
+                int totalDamage = 5;// baseDamage + monsterType.attackDamage;
+                return totalDamage;
+            }
+            if (MonsterType.name == "Wyrm")
+            {
+                int baseDamage = rand.Next(monsterType.attackDamage, monsterType.attackDamage * 2);
+                int totalDamage = 15;// baseDamage + monsterType.attackDamage;
+                return totalDamage;
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
         public int opponentCalculateDamage()
         {

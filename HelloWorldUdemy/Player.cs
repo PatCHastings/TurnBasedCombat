@@ -55,12 +55,12 @@ namespace TurnBasedCombat
                 {
                     // Remove the currently equipped weapon and adjust the attack damage
                     AttackDamage -= EquippedWeapon.GetAttackDamageModifier();
-                    Console.WriteLine(Name + " unequipped " + EquippedWeapon.weaponName + ". Attack damage decreased by " + EquippedWeapon.GetAttackDamageModifier());
+                    Console.WriteLine(name + " unequipped " + EquippedWeapon.weaponName + ". and went from an attack rating of " + EquippedWeapon.GetAttackDamageModifier());
                 }
 
                 EquippedWeapon = selectedWeapon;
                 AttackDamage += EquippedWeapon.GetAttackDamageModifier();
-                Console.WriteLine(Name + " equipped " + selectedWeapon.weaponName + " and gained " + selectedWeapon.GetAttackDamageModifier() + " attack damage!");
+                Console.WriteLine(" to " + selectedWeapon.GetAttackDamageModifier() + " when he equipped " + selectedWeapon.weaponName + "!");
             }
             else
             {
@@ -93,12 +93,16 @@ namespace TurnBasedCombat
 
         public void UsePhysAttack(Opponent opponent)
         {
-            Opponent opponentGone = new Opponent();
+            //Opponent opponentGone = new Opponent();
             MonsterType monsterType = opponent.MonsterType;
             int physDamage = CalculatePhysDamage();
             monsterType.health -= physDamage;
-            Console.WriteLine(name + " swings his sword and strikes! Dealing " + physDamage + " damage to the " + monsterType.name);
-            opponentGone.RemoveDefeatedMonsterAndGenerateNew();
+            Console.WriteLine(name + " swings his " + EquippedWeapon.weaponName + " and strikes! Dealing " + physDamage + " damage to the " + monsterType.name);
+            if (monsterType.health <= 0) 
+            {
+                opponent.RemoveDefeatedMonsterAndGenerateNew();
+            }
+            
         }
         private int CalculatePhysDamage()
         {
@@ -140,7 +144,7 @@ namespace TurnBasedCombat
 
         internal void playerVitals()
         {
-            Console.WriteLine(name + " health: " + health);
+            Console.WriteLine(name + " health: " + health + "  weapon: " + EquippedWeapon.weaponName);
         }
 
         public void StatsManagement()
@@ -153,7 +157,7 @@ namespace TurnBasedCombat
             do
             {
                 
-                Console.WriteLine("");
+                
                 
                 int prompt = int.Parse(Console.ReadLine());
                 switch (prompt)
@@ -162,6 +166,9 @@ namespace TurnBasedCombat
                         ShowAvailableWeapons();
                         int weaponIndex = int.Parse(Console.ReadLine());
                         EquipWeapon(weaponIndex);
+                        Console.WriteLine("..re-examine equipment or re-engage enemy?" +
+                             "\n1: Manage equipment" +
+                             "\n2: Re-engage enemy..");
                         break;
 
                     case 2:

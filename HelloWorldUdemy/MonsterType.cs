@@ -25,6 +25,6 @@ namespace TurnBasedCombat
         }
         public string Name { get; set; }
         public int Health { get; set; }
-        public string AttackDamage { get; set; }
+        public int AttackDamage { get; set; }
     }
 }

@@ -14,7 +14,8 @@ namespace TurnBasedCombat
 {
     class Combat
     {
-
+        private Timer monsterAttackTimer;
+        private const int monsterAttackInterval = 5000;
         internal static bool GameOver(bool gameOver)
         {
             Console.WriteLine("You have died in battle..GAME OVER!");
@@ -24,7 +25,21 @@ namespace TurnBasedCombat
         public static void Main(string[] args)
         {
             Combat game = new Combat();
+            
             game.gameLoop();
+        }
+        private void StartMonsterAttackTimer(Player player, Opponent opponent)
+        {
+            monsterAttackTimer = new Timer(PerformMonsterAttackCallback, new object[] { player, opponent }, monsterAttackInterval, Timeout.Infinite);
+        }
+        private void PerformMonsterAttackCallback(object state)
+        {
+            object[] stateArray = (object[])state;
+            Player player = (Player)stateArray[0];
+            Opponent opponent = (Opponent)stateArray[1];
+
+            opponent.PerformMonsterAttack(player);
+            StartMonsterAttackTimer(player, opponent); // Restart the timer for the next attack
         }
 
         public void gameLoop()
@@ -57,6 +72,7 @@ namespace TurnBasedCombat
             bool gameOver = false;
             while (gameOver == false)
             {
+                StartMonsterAttackTimer(player, opponent);
                 Console.WriteLine(player.name + " What will you do?" +
                     "\n1: Fight" +
                     "\n2: Magic" +
@@ -71,7 +87,6 @@ namespace TurnBasedCombat
                         case 1:
                             Console.WriteLine("CraaacK!");
                             player.UsePhysAttack(opponent);
-                            opponent.RemoveDefeatedMonsterAndGenerateNew();
                             player.playerVitals();
                             opponent.opponentVitals();
                             break;
